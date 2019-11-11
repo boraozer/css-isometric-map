@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>Dragtar</title>
+        <style>
+            body {
+                background:#000;
+            }
+            .map {
+                width:10px;
+                height:10px;
+                position: relative;
+                margin:10% auto ;
+                padding-left:120px;
+            }
+            .tile {
+                width:128px;
+                height:64px;
+                background-image:url("tile.png");
+                position: Absolute;
+            }
+            .stone1 {
+                background-position: 256px -128px;
+            }
+            .grass1 {
+                background-position: 0px 0px;
+            }
+            .stone2 {
+                background-position: 384px -128px;
+            }
+            .grass2 {
+                background-position: 256px -192px;
+            }
+            .tile:hover {
+                box-shadow:inset 1px 1px 5px 0px rgba(115, 63, 63, 0.75);
+            }
+</style>
+    </head>
+    <body>
+        <div class="map">
+        </div>
+    </body>
+    <script>
+        const map=document.querySelector(".map");
+        let marginX=0;
+        let marginY=0;
+        let plusX=0;
+        let plusY=0;
+        for(let y=0;y<5;y++){
+            for(let x=0;x<5;x++){
+                let tile=Math.floor((Math.random()*10));
+                if(tile>0 && tile<6){
+                    tile="grass1";
+                }else if(tile>=6 && tile<=7){
+                    tile="stone1";
+                }
+                else if(tile>8 && tile<=10){
+                    tile="stone2";
+                }
+                map.insertAdjacentHTML("beforeend",`<div class="tile ${tile}" style="left:${marginX}px; top:${marginY}px;"></div>`);
+                marginY+=32;
+                marginX+=64;
+            }
+            marginX=-(64*(y+1));
+            marginY=(32*(y+1));
+        }
+    </script>
+</html>
